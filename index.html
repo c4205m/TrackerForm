@@ -21,45 +21,83 @@
                     <form id="expenseForm">
                         <div class="form-group">
                             <label for="item">Item</label>
-                            <input type="text" id="item" required>
+                            <input type="text" id="item" list="itemSuggestions" autocomplete="off">
+                            <datalist id="itemSuggestions"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" id="price" inputmode="numeric" step="0.01" min="0" required>
                         </div>
                         <div class="form-group">
                             <label for="date">Date</label>
                             <input type="date" id="date" required>
                         </div>
                         <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="number" id="price" inputmode="numeric" required>
+                            <label for="transferType">Transfer Type</label>
+                            <select id="transferType" required>
+                                <option value="Expense">Expense</option>
+                                <option value="Income">Income</option>
+                                <option value="Transfer">Transfer</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
                             <select id="category" required>
-                                <option value="">Select Category</option>
-                                <option value="Home">Home</option>
-                                <option value="Transport">Transport</option>
-                                <option value="Rent">Rent</option>
+                                <optgroup label="Expense">
+                                    <option value="Personal">Personal</option>
+                                    <option value="Groceries">Groceries</option>
+                                    <option value="Household">Household</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Transport">Transport</option>
+                                    <option value="Taxes">Taxes</option>
+                                    <option value="Rent">Rent</option>
+                                    <option value="Subscriptions">Subscriptions</option>
+                                    <option value="Pet Care">Pet Care</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Misc">Misc</option>
+                                </optgroup>
+
+                                <optgroup label="Income">
+                                    <option value="Salary">Salary</option>
+                                    <option value="Bonuses">Bonuses</option>
+                                    <option value="Tips">Tips</option>
+                                    <option value="Gift Income">Gift Income</option>
+                                    <option value="Business Income">Business Income</option>
+                                    <option value="Side Hustles">Side Hustles</option>
+                                    <option value="Freelance">Freelance</option>
+                                    <option value="Investment">Investment</option>
+                                </optgroup>
+
+                                <optgroup label="Transfer">
+                                    <option value="Emergency Fund">Emergency Fund</option>
+                                    <option value="Insurance Payment Fund">Insurance Payment Fund</option>
+                                    <option value="Vacation Fund">Vacation Fund</option>
+                                    <option value="Long-Term Goals Fund">Long-Term Goals Fund</option>
+                                    <option value="New Furniture Fund">New Furniture Fund</option>
+                                    <option value="Selfemployed Retirement Account Contributions">Selfemployed Retirement Account Contributions</option>
+                                    <option value="Investment Expenses">Investment Expenses</option>
+                                    <option value="Saving Fund">Saving Fund</option>
+                                </optgroup>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="secondaryCategory">Secondary Category</label>
-                            <select id="secondaryCategory" required>
+                            <select id="secondaryCategory">
                                 <option value="">Select Secondary Category</option>
-                                <option value="Car">Car</option>
-                                <option value="Kitchen">Kitchen</option>
-                                <option value="Pet">Pet</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="importance">Importance</label>
-                            <select id="importance" required>
+                            <select id="importance">
                                 <option value="">Select Importance</option>
+                                <option value="Saving">Saving</option>
                                 <option value="Want">Want</option>
                                 <option value="Need">Need</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="cycle">Cycle</label>
-                            <select id="cycle" required>
+                            <select id="cycle">
                                 <option value="">Select Cycle</option>
                                 <option value="Recursive">Recursive</option>
                                 <option value="One Time">One Time</option>
@@ -71,23 +109,28 @@
                                 <option value="">Select Account</option>
                                 <option value="Cash">Cash</option>
                                 <option value="Main">Main</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="transferType">Transfer Type</label>
-                            <select id="transferType" required>
-                                <option value="">Select Transfer Type</option>
-                                <option value="Expense">Expense</option>
-                                <option value="Income">Income</option>
-                                <option value="Transfer">Transfer</option>
+                                <option value="AUX">AUX</option>
+                                <option value="USD">USD</option>
+                                <option value="Investment">Investment</option>
+                                <option value="Emergency">Emergency</option>
+                                <option value="Funds">Funds</option>
+                                <option value="Credit Card 1">Credit Card 1</option>
+                                <option value="Credit Card 2">Credit Card 2</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="receiver">Receiver</label>
-                            <select id="receiver" required>
+                            <select id="receiver">
                                 <option value="">Select Receiver</option>
                                 <option value="Cash">Cash</option>
                                 <option value="Main">Main</option>
+                                <option value="AUX">AUX</option>
+                                <option value="USD">USD</option>
+                                <option value="Investment">Investment</option>
+                                <option value="Emergency">Emergency</option>
+                                <option value="Funds">Funds</option>
+                                <option value="Credit Card 1">Credit Card 1</option>
+                                <option value="Credit Card 2">Credit Card 2</option>
                             </select>
                         </div>
                         <button type="submit" class="btn-primary">Add Entry</button>
@@ -95,7 +138,7 @@
                 </div>
                 <div class="table-container">
                     <div class="table-header">
-                        <h2>Recent Expenses</h2>
+                        <h2>Saved Expenses</h2>
                         <div class="table-actions">
                             <button id="downloadBtn" class="btn-icon" title="Download CSV">
                                 <i class="fas fa-download"></i>
@@ -137,14 +180,19 @@
             </div>
             <div class="view" id="stats-view">
                 <h2>Statistics</h2>
-                <p>Statistics view will be implemented here.</p>
+                <div class="chart-container">
+                    <canvas id="importanceChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div id="insights" class="insights-box"></div>
             </div>
             <div class="view" id="settings-view">
                 <h2>Settings</h2>
-                <p>Settings view will be implemented here.</p>
             </div>
         </main>
-        <!-- <footer class="app-footer">
+        <footer class="app-footer">
             <div class="footer-tabs">
                 <button class="tab-btn active" data-tab="expense-view">
                     <i class="fas fa-home"></i>
@@ -159,7 +207,7 @@
                     <span>Settings</span>
                 </button>
             </div>
-        </footer> -->
+        </footer>
     </div>
     <input type="file" id="importFile" accept=".csv" style="display: none;">
     <div class="loading-overlay" id="loadingOverlay">
@@ -169,6 +217,7 @@
         </div>
     </div>
     <div class="toast" id="toast"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
