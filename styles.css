@@ -235,6 +235,41 @@ tr:hover {
     color: var(--light-text);
 }
 
+.chart-container {
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px;
+}
+
+.insights-box {
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+.insights-box p {
+    margin-bottom: 8px;
+}
+
+.insights-box li {
+    padding-left: 10px;
+    list-style: "";
+}
+
 .empty-state i {
     font-size: 48px;
     margin-bottom: 10px;
@@ -292,5 +327,11 @@ tr:hover {
 
     th, td {
         padding: 8px 10px;
+    }
+    .chart-container {
+        padding: 15px;
+    }
+    .chart-container canvas {
+        max-height: 300px;
     }
 }
